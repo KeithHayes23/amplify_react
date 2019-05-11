@@ -1,3 +1,29 @@
+
+# What is this?
+
+This is an wip project that uses [AWS Amplify](https://aws-amplify.github.io/) for the backend
+and reactjs for the client. The current destination is unknow at this point. I'm just cutting my teeth on reactjs and needed a project to practice.
+
+
+# Getting things setup
+yarn global add @aws-amplify/cli
+yarn global add create-react-app
+yarn add aws-amplify aws-amplify-react bootstrap
+npx create-react-app <name>
+amplify configure
+amplify init
+amplify add api
+amplify push
+amplify serve
+
+# This does cloudfront
+amplify add hosting
+amplify hosting configure
+amplify publish
+
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
