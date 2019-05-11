@@ -26,3 +26,25 @@ export const listItems = `query ListItems(
   }
 }
 `;
+export const searchItems = `query SearchItems(
+  $filter: SearchableItemFilterInput
+  $sort: SearchableItemSortInput
+  $limit: Int
+  $nextToken: Int
+) {
+  searchItems(
+    filter: $filter
+    sort: $sort
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      name
+      price
+      description
+    }
+    nextToken
+  }
+}
+`;

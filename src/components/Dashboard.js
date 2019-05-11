@@ -10,10 +10,8 @@ import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
-import Badge from '@material-ui/core/Badge';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import NotificationsIcon from '@material-ui/icons/Notifications';
 import CardView from '../components/CardView'
 import {mainMenuItems} from '../components/LeftMenuView'
 
@@ -163,10 +161,8 @@ class Dashboard extends React.Component {
 
        </Drawer>
        <main className={classes.content}>
-         <div className={classes.appBarSpacer} />
-         <Typography component="div" className={classes.chartContainer}>
-           <CardView/>
-         </Typography>
+          <div className={classes.appBarSpacer} />
+          <CardView/>
        </main>
      </div>
    );

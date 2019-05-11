@@ -24,7 +24,7 @@ Currently I'm using Material UI
 
 ```
 yarn add @material-ui/core
-yarn add #material-ui/icons
+yarn add @material-ui/icons
 ```
 
 ### Setup AWS Backend

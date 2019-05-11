@@ -13,7 +13,7 @@ import { Connect } from "aws-amplify-react";
 import * as queries from '../graphql/queries';
 import * as subscriptions from '../graphql/subscriptions';
 import Loader from './Loader';
-import AddItem from './addItem'
+import SearchBar from './SearchBar'
 
 const styles = {
   card: {
@@ -86,8 +86,8 @@ class CardView extends Component {
     const { items } = this.state;
 
     const ItemView = ({ items }) => (
-      <div>
-      <AddItem/>
+      <div >
+      <SearchBar/>
       <Grid container className={classes.root} spacing={16}>
           {items.map(item => (
              <Grid key={item.id} item>
