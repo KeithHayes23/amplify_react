@@ -1,0 +1,19 @@
+AKIAQ37DKCYCMRPKKOCX
+yUgEWdLXutQ6oYCeWAGPQYDu8rce846apkWZZLnf
+
+
+
+yarn global add @aws-amplify/cli
+yarn global add create-react-app
+yarn add aws-amplify aws-amplify-react bootstrap
+npx create-react-app <name>
+amplify configure
+amplify init
+amplify add api
+amplify push
+amplify serve
+
+# This does cloudfront
+amplify add hosting
+amplify hosting configure
+amplify publish
