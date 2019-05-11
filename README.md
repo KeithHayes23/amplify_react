@@ -11,17 +11,20 @@ Amplify is used to setup Authentication, Appsync, Storage in the cloud.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+###Dependencies
 ```
 yarn global add @aws-amplify/cli
 yarn global add create-react-app
 yarn add aws-amplify aws-amplify-react bootstrap
+```
+```
 amplify configure
 amplify init
 amplify add api
 amplify push
 amplify serve
 ```
-# This sets up hosting on cloudfront
+### This sets up hosting on cloudfront
 ```
 amplify add hosting
 amplify hosting configure
