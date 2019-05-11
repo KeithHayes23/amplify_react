@@ -1,6 +1,0 @@
-type Item @model @searchable{
-  id: ID!
-  name: String!
-  price: Int
-  description: String
-}
