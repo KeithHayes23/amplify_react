@@ -28,7 +28,6 @@ export const onDeleteItem = `subscription OnDeleteItem {
   }
 }
 `;
-
 export const onAnySubs = `subscription onAnySubs {
   onDeleteItem {
     id
