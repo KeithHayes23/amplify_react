@@ -17,9 +17,16 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ### Dependencies
 ```
 yarn global add @aws-amplify/cli
-yarn global add create-react-app
-yarn add aws-amplify aws-amplify-react bootstrap
+yarn add aws-amplify aws-amplify-react
 ```
+### UI Framework
+Currently I'm using Material UI
+
+```
+yarn add @material-ui/core
+yarn add #material-ui/icons
+```
+
 ### Setup AWS Backend
 ```
 amplify configure
