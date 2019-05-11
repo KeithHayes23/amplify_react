@@ -8,8 +8,7 @@ Amplify is used to setup Authentication, Appsync, Storage in the cloud.
 
 # Architecture
 
-![alt text](https://github.com/KeithHayes23/amplify_react/blob/master/amplify_react_arch.png =250x)
-<img src="amplify_react_arch.png" width="200">
+<img src="amplify_react_arch.png" width="600">
 
 # Getting things setup
 
