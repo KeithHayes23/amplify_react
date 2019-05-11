@@ -97,7 +97,7 @@ amplify serve
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 Create an account, validate with MFA and login.
 
-<img src="assets/login_screen.png" width="600">
+<img src="assets/login_screen.png" width="400">
 
 ### This sets up hosting on cloudfront or from an S3 Bucket
 
