@@ -2,7 +2,7 @@
 # What is this?
 
 This is an wip project that uses [AWS Amplify](https://aws-amplify.github.io/) for the backend
-and reactjs for the client. Graphql and AWS Appsync is the glue to connect the frontend to the backend. The current destination is unknown at this point. I'm just cutting my teeth on reactjs and needed a project to practice.
+and reactjs for the client. Graphql and AWS Appsync is the glue to connects the frontend to the backend. The current destination is unknown at this point. I'm just cutting my teeth on reactjs and needed a project to practice.
 
 Amplify is used to setup Authentication, Appsync, Storage in the cloud.
 
