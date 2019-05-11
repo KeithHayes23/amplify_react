@@ -1,7 +1,3 @@
-AKIAQ37DKCYCMRPKKOCX
-yUgEWdLXutQ6oYCeWAGPQYDu8rce846apkWZZLnf
-
-
 
 yarn global add @aws-amplify/cli
 yarn global add create-react-app
