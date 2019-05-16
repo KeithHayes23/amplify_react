@@ -1,19 +1,14 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
-import EditItem from './editItem'
-import DeleteItem from './deleteItem'
 import { graphqlOperation }  from "aws-amplify";
 import { Connect } from "aws-amplify-react";
 import * as queries from '../graphql/queries';
 import * as subscriptions from '../graphql/subscriptions';
 import Loader from './Loader';
 import SearchBar from './SearchBar'
+import Device from './device/Device'
 
 const styles = {
   card: {
@@ -59,70 +54,52 @@ class CardView extends Component {
   }
 
 //  getItems = () => {
-//    API.graphql(graphqlOperation(queries.listItems))
-//    .then(data => this.setState({items: data.data.listItems.items}))
+//    API.graphql(graphqlOperation(queries.listDevices))
+//    .then(data => this.setState({items: data.data.listDevices.items}))
 //  };
   onNewItem = (prevQuery, newData) => {
     let updatedQuery = Object.assign({}, prevQuery);
     var index;
-    console.log(prevQuery.listItems.items)
+    console.log(prevQuery.listDevices.items)
     console.log(newData)
-    if(newData.onCreateItem) {
-        updatedQuery.listItems.items = prevQuery.listItems.items.concat([newData.onCreateItem]);
-    } else if(newData.onDeleteItem) {
-        index = findIndexByKeyValue(prevQuery.listItems.items,"id",newData.onDeleteItem.id)
-        updatedQuery.listItems.items.splice(index,1);
-    } else if(newData.onUpdateItem) {
-        index = findIndexByKeyValue(prevQuery.listItems.items,"id",newData.onUpdateItem.id)
-        console.log(index)
-        console.log(newData.onUpdateItem)
-        Object.assign(updatedQuery.listItems.items[index], newData.onUpdateItem)
+    if(newData.onCreateDevice) {
+        updatedQuery.listDevices.items = prevQuery.listDevices.items.concat([newData.onCreateDevice]);
+    } else if(newData.onDeleteDevice) {
+        index = findIndexByKeyValue(prevQuery.listDevices.items,"id",newData.onDeleteDevice.id)
+        updatedQuery.listDevices.items.splice(index,1);
+    } else if(newData.onUpdateDevice) {
+        index = findIndexByKeyValue(prevQuery.listDevices.items,"id",newData.onUpdateDevice.id)
+        Object.assign(updatedQuery.listDevices.items[index], newData.onUpdateDevice)
     }
     return updatedQuery;
   }
 
   render(){
     const { classes } = this.props;
-    const { items } = this.state;
+    const { devices } = this.state;
 
-    const ItemView = ({ items }) => (
+    const DeviceView = ({ devices }) => (
       <div >
       <SearchBar/>
       <Grid container className={classes.root} spacing={16}>
-          {items.map(item => (
-             <Grid key={item.id} item>
-                 <Card className={classes.card}>
-                   <CardContent>
-                     <Typography className={classes.title} color="textSecondary" gutterBottom>
-                       {item.name}
-                     </Typography>
-                      <Typography component="p">
-                      ${item.price}
-                      </Typography>
-                      <br />
-                      <Typography component="p">
-                      {item.description}
-                      </Typography>
-                  </CardContent>
-                    <CardActions>
-                      <EditItem currentItem={item}/>
-                      <DeleteItem currentItem={item}/>
-                   </CardActions>
-                 </Card>
-               </Grid>
+          {devices.map(device => (
+             <Grid key={device.id} item>
+                 <Device device={device}/>
+             </Grid>
              ))}
          </Grid>
       </div>
     );
     return (
-      <Connect query={graphqlOperation(queries.listItems, {limit:100})}
+      <Connect query={graphqlOperation(queries.listDevices, {limit:100})}
         subscription={graphqlOperation(subscriptions.onAnySubs)}
         onSubscriptionMsg={this.onNewItem}
         >
-        {({ data: { listItems }, loading, error }) => {
+        {({ data: { listDevices }, loading, error }) => {
             if (error) return (<h3>Error</h3>);
-            if (loading || !listItems) return (<Loader/>);
-            return (<ItemView items={listItems.items} /> );
+            if (loading || !listDevices) return (<Loader/>);
+            console.log(listDevices)
+            return (<DeviceView devices={listDevices.items} /> );
         }}
       </Connect>
     );

@@ -1,51 +1,81 @@
 // eslint-disable
 // this is an auto generated file. This will be overwritten
 
-export const onCreateItem = `subscription OnCreateItem {
-  onCreateItem {
+export const onCreateDevice = `subscription OnCreateDevice {
+  onCreateDevice {
     id
+    serialNumber
+    group
+    deviceId
+    activationCode
+    activated
     name
-    price
-    description
+    type
+    endpoint
   }
 }
 `;
-export const onUpdateItem = `subscription OnUpdateItem {
-  onUpdateItem {
+export const onUpdateDevice = `subscription OnUpdateDevice {
+  onUpdateDevice {
     id
+    serialNumber
+    group
+    deviceId
+    activationCode
+    activated
     name
-    price
-    description
+    type
+    endpoint
   }
 }
 `;
-export const onDeleteItem = `subscription OnDeleteItem {
-  onDeleteItem {
+export const onDeleteDevice = `subscription OnDeleteDevice {
+  onDeleteDevice {
     id
+    serialNumber
+    group
+    deviceId
+    activationCode
+    activated
     name
-    price
-    description
+    type
+    endpoint
   }
 }
 `;
 export const onAnySubs = `subscription onAnySubs {
-  onDeleteItem {
+  onDeleteDevice {
     id
+    serialNumber
+    group
+    deviceId
+    activationCode
+    activated
     name
-    price
-    description
+    type
+    endpoint
   },
-  onUpdateItem {
+  onUpdateDevice {
     id
+    serialNumber
+    group
+    deviceId
+    activationCode
+    activated
     name
-    price
-    description
+    type
+    endpoint
   },
-  onCreateItem {
+  onCreateDevice {
     id
+    serialNumber
+    group
+    deviceId
+    activationCode
+    activated
     name
-    price
-    description
+    type
+    endpoint
   }
 }
 `;

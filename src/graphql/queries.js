@@ -1,48 +1,36 @@
 // eslint-disable
 // this is an auto generated file. This will be overwritten
 
-export const getItem = `query GetItem($id: ID!) {
-  getItem(id: $id) {
+export const getDevice = `query GetDevice($id: ID!) {
+  getDevice(id: $id) {
     id
+    serialNumber
+    group
+    deviceId
+    activationCode
+    activated
     name
-    price
-    description
+    type
+    endpoint
   }
 }
 `;
-export const listItems = `query ListItems(
-  $filter: ModelItemFilterInput
+export const listDevices = `query ListDevices(
+  $filter: ModelDeviceFilterInput
   $limit: Int
   $nextToken: String
 ) {
-  listItems(filter: $filter, limit: $limit, nextToken: $nextToken) {
+  listDevices(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
+      serialNumber
+      group
+      deviceId
+      activationCode
+      activated
       name
-      price
-      description
-    }
-    nextToken
-  }
-}
-`;
-export const searchItems = `query SearchItems(
-  $filter: SearchableItemFilterInput
-  $sort: SearchableItemSortInput
-  $limit: Int
-  $nextToken: Int
-) {
-  searchItems(
-    filter: $filter
-    sort: $sort
-    limit: $limit
-    nextToken: $nextToken
-  ) {
-    items {
-      id
-      name
-      price
-      description
+      type
+      endpoint
     }
     nextToken
   }

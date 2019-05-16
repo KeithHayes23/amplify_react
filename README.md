@@ -52,34 +52,34 @@ This command builds the backend. Check out Cloudformation to see what it is doin
 ```
 amplify push
 ```
-One last thing I need to resolve. Using the amplify <Connect/> component only allow for 1 subscription. I am interested in Creates, Updates and Deletes so I add an consolidated subscription that notify's the app if any of those condition occur.
+One last thing I need to resolve. Using the amplify <Connect/> component only allows for 1 subscription. I am interested in Creates, Updates and Deletes so I add an consolidated subscription that notify's the app if any of those condition occur.
 Has to be a better way but until I figure that out here's a work around.
 
 In the aws console open the appsync service select schema, find the type Subscriptions part and a onAnySubs item.
 ```
 type Subscription {
 	...
-	onAnySubs: Item
-		@aws_subscribe(mutations: ["createItem","updateItem","deleteItem"])
+	onAnySubs: Device
+		@aws_subscribe(mutations: ["createDevice", "updateDevice", "deleteDevice"])
 }
 ```
 
 Add this to src/graphql/subscriptions.js
 ```
 export const onAnySubs = `subscription onAnySubs {
-  onDeleteItem {
+  onDeleteDevice {
     id
     name
     price
     description
   },
-  onUpdateItem {
+  onUpdateDevice {
     id
     name
     price
     description
   },
-  onCreateItem {
+  onCreateDevice {
     id
     name
     price
@@ -112,3 +112,4 @@ amplify publish
 ```
 amplify delete
 ```
+Be sure to delete the src/aws-exports.json file.

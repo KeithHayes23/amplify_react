@@ -5,7 +5,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import SearchIcon from '@material-ui/icons/Search';
 import { fade } from '@material-ui/core/styles/colorManipulator';
-import AddItem from './addItem'
+import AddDevice from './device/addDevice'
 
 const styles = theme => ({
   root: {
@@ -61,9 +61,9 @@ function SearchBar(props) {
   const { classes } = props;
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="static" color="default">
         <Toolbar>
-          <AddItem/>
+          <AddDevice/>
           <div className={classes.grow} />
           <div className={classes.search}>
             <div className={classes.searchIcon}>

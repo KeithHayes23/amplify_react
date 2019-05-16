@@ -4,19 +4,24 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import EditIcon from '@material-ui/icons/Edit';
+import FormGroup from '@material-ui/core/FormGroup';
 import Button from '@material-ui/core/Button';
 import { API, graphqlOperation } from "aws-amplify";
-import * as mutations from '../graphql/mutations';
+import * as mutations from '../../graphql/mutations';
 
 
-class EditItem extends Component {
+class EditDevice extends Component {
 
   state = {
     open: false,
-    itemName: '',
-    itemPrice: '',
-    itemDescription: ''
+    serialNumber: '',
+    group: '',
+    deviceId: '',
+    name: '',
+    activationCode: '',
+    activated: '',
+    type: '',
+    endpoint: ''
   };
 
   handleClickOpen = () => {
@@ -39,19 +44,20 @@ class EditItem extends Component {
     this.setState({ open: false });
     var itemDetails = {
       id: this.props.currentItem.id,
-      name: this.state.itemName || this.props.currentItem.name,
-      price: this.state.itemPrice || this.props.currentItem.price,
-      description: this.state.itemDescription || this.props.currentItem.description
+      name: this.state.deviceName || this.props.currentItem.name,
+      group: this.state.deviceGroup || this.props.currentItem.group,
+      serialNumber: this.state.deviceSerialNumber || this.props.currentItem.serialNumber,
+      deviceId: this.state.deviceDeviceId || this.props.currentItem.deviceId
     }
-    API.graphql(graphqlOperation(mutations.updateItem, {input: itemDetails}));
+    API.graphql(graphqlOperation(mutations.updateDevice, {input: itemDetails}));
     // window.location.reload()
   }
 
   render() {
       return (
       <div style={{display: 'flex', flexWrap: 'wrap'}}>
-      <Button size='small' color="inherit" aria-label="Edit" onClick={this.handleClickOpen}>
-        <EditIcon />
+      <Button size='small' aria-label="Edit" onClick={this.handleClickOpen}>
+        EDIT
       </Button>
 
         <Dialog
@@ -59,36 +65,42 @@ class EditItem extends Component {
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
         >
-          <DialogTitle id="form-dialog-title">Edit Item: {this.props.currentItem.name}</DialogTitle>
+          <DialogTitle id="form-dialog-title">Edit Device: {this.props.currentItem.name}</DialogTitle>
           <DialogContent>
-
+            <FormGroup>
               <TextField
                 style={{marginRight: 10}}
-                id="itemName"
+                id="deviceName"
                 placeholder={this.props.currentItem.name}
                 label="Name"
                 type="string"
-                onChange={this.handleChange('itemName')}
+                onChange={this.handleChange('deviceName')}
               />
               <TextField
                 style={{marginRight: 10}}
-                id="itemPrice"
-                placeholder={"£" + this.props.currentItem.price}
-                label="Price"
-                type="number"
-                onChange={this.handleChange('itemPrice')}
+                id="deviceGroup"
+                placeholder={this.props.currentItem.group}
+                label="Group"
+                type="string"
+                onChange={this.handleChange('deviceGroup')}
               />
               <TextField
                 style={{marginTop: 10}}
-                multiline
-                id="itemDescription"
-                placeholder={this.props.currentItem.description}
-                label="Description"
+                id="deviceSerialNumber"
+                placeholder={this.props.currentItem.serialNumber}
+                label="Serial Number"
                 type="string"
-                rows="4"
-                fullWidth
-                onChange={this.handleChange('itemDescription')}
+                onChange={this.handleChange('deviceSerialNumber')}
               />
+              <TextField
+                style={{marginTop: 10}}
+                id="deviceDeviceId"
+                placeholder={this.props.currentItem.deviceId}
+                label="DeviceId"
+                type="string"
+                onChange={this.handleChange('deviceDeviceId')}
+              />
+            </FormGroup>
           </DialogContent>
           <DialogActions>
             <Button onClick={this.handleClose} color="primary">
@@ -104,4 +116,4 @@ class EditItem extends Component {
   }
 }
 
-export default EditItem;
+export default EditDevice;

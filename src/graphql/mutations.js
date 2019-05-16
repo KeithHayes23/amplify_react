@@ -1,30 +1,45 @@
 // eslint-disable
 // this is an auto generated file. This will be overwritten
 
-export const createItem = `mutation CreateItem($input: CreateItemInput!) {
-  createItem(input: $input) {
+export const createDevice = `mutation CreateDevice($input: CreateDeviceInput!) {
+  createDevice(input: $input) {
     id
+    serialNumber
+    group
+    deviceId
+    activationCode
+    activated
     name
-    price
-    description
+    type
+    endpoint
   }
 }
 `;
-export const updateItem = `mutation UpdateItem($input: UpdateItemInput!) {
-  updateItem(input: $input) {
+export const updateDevice = `mutation UpdateDevice($input: UpdateDeviceInput!) {
+  updateDevice(input: $input) {
     id
+    serialNumber
+    group
+    deviceId
+    activationCode
+    activated
     name
-    price
-    description
+    type
+    endpoint
   }
 }
 `;
-export const deleteItem = `mutation DeleteItem($input: DeleteItemInput!) {
-  deleteItem(input: $input) {
+export const deleteDevice = `mutation DeleteDevice($input: DeleteDeviceInput!) {
+  deleteDevice(input: $input) {
     id
+    serialNumber
+    group
+    deviceId
+    activationCode
+    activated
     name
-    price
-    description
+    type
+    endpoint
   }
 }
 `;

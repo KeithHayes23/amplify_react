@@ -4,19 +4,44 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import FormGroup from '@material-ui/core/FormGroup';
 import AddIcon from '@material-ui/icons/Add';
 import Button from '@material-ui/core/Button';
 import { API, graphqlOperation } from "aws-amplify";
-import * as mutations from '../graphql/mutations';
+import * as mutations from '../../graphql/mutations';
+import { withStyles } from '@material-ui/core/styles';
 
 
-class AddItem extends Component {
+const styles = theme => ({
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    width: 200,
+  },
+  dense: {
+    marginTop: 19,
+  },
+  menu: {
+    width: 200,
+  },
+});
+
+class AddDevice extends Component {
 
   state = {
     open: false,
-    itemName: '',
-    itemPrice: '',
-    itemDescription: ''
+    serialNumber: '',
+    group: '',
+    deviceId: '',
+    name: '',
+    activationCode: '',
+    activated: '',
+    type: '',
+    endpoint: ''
   };
 
   handleClickOpen = () => {
@@ -31,23 +56,24 @@ class AddItem extends Component {
     this.setState({
       [name]: event.target.value,
     });
-    //console.log("Name: " + this.state.itemName + " Price: £" + this.state.itemPrice + " Description:" + this.state.itemDescription)
   };
 
 
   handleSubmit = (e) => {
     this.setState({ open: false });
     var itemDetails = {
-      name: this.state.itemName,
-      price: this.state.itemPrice,
-      description: this.state.itemDescription,
+      serialNumber: this.state.deviceSerialNumber,
+      group: this.state.deviceGroup,
+      deviceId: this.state.deviceDeviceId,
+      name: this.state.deviceName,
     }
     console.log("Item Details : " + JSON.stringify(itemDetails))
-    API.graphql(graphqlOperation(mutations.createItem, {input: itemDetails}));
+    API.graphql(graphqlOperation(mutations.createDevice, {input: itemDetails}));
     // window.location.reload()
   }
 
   render() {
+    const { classes } = this.props;
       return (
       <div style={{display: 'flex', flexWrap: 'wrap'}}>
       <Button  mini color="inherit" aria-label="Add" onClick={this.handleClickOpen}>
@@ -59,33 +85,42 @@ class AddItem extends Component {
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
         >
-          <DialogTitle id="form-dialog-title">Add a New Item</DialogTitle>
-          <DialogContent>
-
+          <DialogTitle id="form-dialog-title">Add a New Device</DialogTitle>
+          <DialogContent className={classes.container}>
+            <FormGroup>
               <TextField
+                required
                 style={{marginRight: 10}}
-                id="itemName"
+                id="deviceName"
                 label="Name"
                 type="string"
-                onChange={this.handleChange('itemName')}
+                onChange={this.handleChange('deviceName')}
               />
               <TextField
+                required
                 style={{marginRight: 10}}
-                id="itemPrice"
-                label="Price"
-                type="number"
-                onChange={this.handleChange('itemPrice')}
+                id="deviceSerialNumber"
+                label="serialNumber"
+                type="string"
+                onChange={this.handleChange('deviceSerialNumber')}
               />
               <TextField
-                style={{marginTop: 10}}
-                multiline
-                id="itemDescription"
-                label="Description"
+                required
+                style={{marginRight: 10}}
+                id="deviceGroup"
+                label="Group"
                 type="string"
-                rows="4"
-                fullWidth
-                onChange={this.handleChange('itemDescription')}
+                onChange={this.handleChange('deviceGroup')}
               />
+              <TextField
+                required
+                style={{marginRight: 10}}
+                id="deviceDeviceId"
+                label="DeviceId"
+                type="string"
+                onChange={this.handleChange('deviceDeviceId')}
+              />
+            </FormGroup>
           </DialogContent>
           <DialogActions>
             <Button onClick={this.handleClose} color="primary">
@@ -101,4 +136,4 @@ class AddItem extends Component {
   }
 }
 
-export default AddItem;
+export default  withStyles(styles)(AddDevice);

@@ -28,7 +28,6 @@ export default class JSignOut extends Component {
   async componentDidMount() {
       await (await Auth.currentCredentials()).getPromise(); // Wait for credentials
       const info = await Auth.currentUserInfo()
-      console.log('Returned info: ', info)
       this.setState({ info })
     }
 
