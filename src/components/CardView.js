@@ -49,10 +49,6 @@ class CardView extends Component {
     items: []
   }
 
-  componentDidMount = () => {
-  //  this.getItems()
-  }
-
 //  getItems = () => {
 //    API.graphql(graphqlOperation(queries.listDevices))
 //    .then(data => this.setState({items: data.data.listDevices.items}))

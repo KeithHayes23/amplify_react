@@ -36,3 +36,30 @@ export const listDevices = `query ListDevices(
   }
 }
 `;
+export const searchDevices = `query SearchDevices(
+  $filter: SearchableDeviceFilterInput
+  $sort: SearchableDeviceSortInput
+  $limit: Int
+  $nextToken: Int
+) {
+  searchDevices(
+    filter: $filter
+    sort: $sort
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      serialNumber
+      group
+      deviceId
+      activationCode
+      activated
+      name
+      type
+      endpoint
+    }
+    nextToken
+  }
+}
+`;

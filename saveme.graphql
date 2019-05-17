@@ -1,4 +1,4 @@
-type Device @model {
+type Device @model @searchable{
   id: ID!
   serialNumber: String!
   group: String!

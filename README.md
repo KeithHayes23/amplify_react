@@ -69,21 +69,36 @@ Add this to src/graphql/subscriptions.js
 export const onAnySubs = `subscription onAnySubs {
   onDeleteDevice {
     id
+    serialNumber
+    group
+    deviceId
+    activationCode
+    activated
     name
-    price
-    description
+    type
+    endpoint
   },
   onUpdateDevice {
     id
+    serialNumber
+    group
+    deviceId
+    activationCode
+    activated
     name
-    price
-    description
+    type
+    endpoint
   },
   onCreateDevice {
     id
+    serialNumber
+    group
+    deviceId
+    activationCode
+    activated
     name
-    price
-    description
+    type
+    endpoint
   }
 }
 `;
@@ -113,3 +128,13 @@ amplify publish
 amplify delete
 ```
 Be sure to delete the src/aws-exports.json file.
+
+
+
+### References
+https://github.com/aws-samples/aws-amplify-graphql
+https://medium.com/open-graphql/create-a-multiuser-graphql-crud-l-app-in-10-minutes-with-the-new-aws-amplify-cli-and-in-a-few-73aef3d49545
+
+### TODO
+
+Implement search feature in app bar

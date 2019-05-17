@@ -57,8 +57,15 @@ const styles = theme => ({
   },
 });
 
+
 function SearchBar(props) {
   const { classes } = props;
+
+  const handleChange = (event) => {
+    const { target: { name, value } } = event;
+    console.log(value)
+  }
+  
   return (
     <div className={classes.root}>
       <AppBar position="static" color="default">
@@ -75,7 +82,9 @@ function SearchBar(props) {
                 root: classes.inputRoot,
                 input: classes.inputInput,
               }}
+              onChange={handleChange}
             />
+
           </div>
         </Toolbar>
       </AppBar>
