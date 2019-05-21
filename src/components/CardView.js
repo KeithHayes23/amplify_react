@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import { graphqlOperation }  from "aws-amplify";
+import Button from '@material-ui/core/Grid'
+import {API, graphqlOperation }  from "aws-amplify";
 import { Connect } from "aws-amplify-react";
 import * as queries from '../graphql/queries';
 import * as subscriptions from '../graphql/subscriptions';
@@ -44,20 +45,29 @@ function findIndexByKeyValue(obj, key, value)
 }
 
 class CardView extends Component {
-
-  state = {
-    items: []
+  constructor(){
+    super();
+    this.state = {
+      items: []
+    }
+  //  this.handleSearch = this.handleSearch.bind(this);
   }
 
+    runMe(_string) {
+      console.log(_string);
+      this.handleSearch();
+    }
 //  getItems = () => {
-//    API.graphql(graphqlOperation(queries.listDevices))
+//    const filter = {filter:{name:{eq:"LightBulb2"}}};
+//    API.graphql(graphqlOperation(queries.searchDevices,filter))
 //    .then(data => this.setState({items: data.data.listDevices.items}))
 //  };
+
   onNewItem = (prevQuery, newData) => {
     let updatedQuery = Object.assign({}, prevQuery);
     var index;
-    console.log(prevQuery.listDevices.items)
-    console.log(newData)
+    //console.log(prevQuery.listDevices.items)
+    //console.log(newData)
     if(newData.onCreateDevice) {
         updatedQuery.listDevices.items = prevQuery.listDevices.items.concat([newData.onCreateDevice]);
     } else if(newData.onDeleteDevice) {
@@ -74,9 +84,20 @@ class CardView extends Component {
     const { classes } = this.props;
     const { devices } = this.state;
 
+    const handleSearch = async (event) => {
+        console.log(event);
+        const filter = {filter: { name : { match : "LightBulb2" }}};
+        const result = await API.graphql(graphqlOperation(queries.searchDevices, filter));
+        this.setState({items:result.data.searchDevices.items});
+        if(result.data.searchDevices.items.length == 0){
+          console.log(result.data.searchDevices.items.length);
+          //this.setState({searchResults:[{note:"No Match: Clear the search to go back to your Notes"}]});
+        };
+      }
+
     const DeviceView = ({ devices }) => (
       <div >
-      <SearchBar/>
+      <SearchBar getSearchString={() => handleSearch()} />
       <Grid container className={classes.root} spacing={16}>
           {devices.map(device => (
              <Grid key={device.id} item>
@@ -94,8 +115,9 @@ class CardView extends Component {
         {({ data: { listDevices }, loading, error }) => {
             if (error) return (<h3>Error</h3>);
             if (loading || !listDevices) return (<Loader/>);
-            console.log(listDevices)
-            return (<DeviceView devices={listDevices.items} /> );
+            this.items = listDevices.items
+
+            return (<DeviceView devices={this.items} /> );
         }}
       </Connect>
     );

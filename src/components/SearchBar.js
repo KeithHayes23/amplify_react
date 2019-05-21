@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import InputBase from '@material-ui/core/InputBase';
 import AppBar from '@material-ui/core/AppBar';
@@ -58,38 +58,49 @@ const styles = theme => ({
 });
 
 
-function SearchBar(props) {
-  const { classes } = props;
-
-  const handleChange = (event) => {
-    const { target: { name, value } } = event;
-    console.log(value)
+class SearchBar extends Component {
+  constructor(props) {
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
+    this.searchString= this.props.searchString;
   }
-  
-  return (
-    <div className={classes.root}>
-      <AppBar position="static" color="default">
-        <Toolbar>
-          <AddDevice/>
-          <div className={classes.grow} />
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
-            <InputBase
-              placeholder="Search…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              onChange={handleChange}
-            />
 
-          </div>
-        </Toolbar>
-      </AppBar>
-    </div>
-  );
+  handleChange(event){
+    event.preventDefault()
+    const { target: { name, value } } = event;
+    this.searchString = value;
+    console.log(this.searchString);
+
+    this.props.getSearchString(this.searchString);
+  }
+
+  render() {
+    const { classes } = this.props;
+    return (
+      <div className={classes.root}>
+        <AppBar position="static" color="default">
+          <Toolbar>
+            <AddDevice/>
+            <div className={classes.grow} />
+            <div className={classes.search}>
+              <div className={classes.searchIcon}>
+                <SearchIcon />
+              </div>
+              <InputBase
+                placeholder="Search…"
+                classes={{
+                  root: classes.inputRoot,
+                  input: classes.inputInput,
+                }}
+                onChange={this.handleChange}
+              />
+
+            </div>
+          </Toolbar>
+        </AppBar>
+      </div>
+    );
+  }
 }
 
 export default withStyles(styles)(SearchBar);

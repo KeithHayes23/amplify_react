@@ -132,8 +132,24 @@ Be sure to delete the src/aws-exports.json file.
 
 
 ### References
+https://amplify-workshop.go-aws.com/
 https://github.com/aws-samples/aws-amplify-graphql
 https://medium.com/open-graphql/create-a-multiuser-graphql-crud-l-app-in-10-minutes-with-the-new-aws-amplify-cli-and-in-a-few-73aef3d49545
+https://read.acloud.guru/build-your-own-multi-user-photo-album-app-with-react-graphql-and-aws-amplify-18d9cfe27f60
+https://medium.com/open-graphql/implementing-search-in-graphql-11d5f71f179
+https://amplify-workshop.go-aws.com/140_bonus/10_lightbox_photos.html
+
+### CLI Commands
+
+####Get the domain name
+```
+aws es list-domain-names
+```
+
+#### Find the domain endpoint
+```
+aws es describe-elasticsearch-domain --domain-name
+```
 
 ### TODO
 
