@@ -132,12 +132,12 @@ Be sure to delete the src/aws-exports.json file.
 
 
 ### References
-https://amplify-workshop.go-aws.com/
-https://github.com/aws-samples/aws-amplify-graphql
-https://medium.com/open-graphql/create-a-multiuser-graphql-crud-l-app-in-10-minutes-with-the-new-aws-amplify-cli-and-in-a-few-73aef3d49545
-https://read.acloud.guru/build-your-own-multi-user-photo-album-app-with-react-graphql-and-aws-amplify-18d9cfe27f60
-https://medium.com/open-graphql/implementing-search-in-graphql-11d5f71f179
-https://amplify-workshop.go-aws.com/140_bonus/10_lightbox_photos.html
+1. https://amplify-workshop.go-aws.com/
+2. https://github.com/aws-samples/aws-amplify-graphql
+3. https://medium.com/open-graphql/create-a-multiuser-graphql-crud-l-app-in-10-minutes-with-the-new-aws-amplify-cli-and-in-a-few-73aef3d49545
+4. https://read.acloud.guru/build-your-own-multi-user-photo-album-app-with-react-graphql-and-aws-amplify-18d9cfe27f60
+5. https://medium.com/open-graphql/implementing-search-in-graphql-11d5f71f179
+6. https://amplify-workshop.go-aws.com/140_bonus/10_lightbox_photos.html
 
 ### CLI Commands
 
