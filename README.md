@@ -40,6 +40,7 @@ This command initializes the project. Framework to use, editor etc. Were using r
 ```
 amplify init
 ```
+<img src="assets/install_ss1.png" width="400">
 
 During the next step it will ask you Do you have an annotated GraphQL schema? (y/N) enter yes
 For the file use saveme.graphql
@@ -115,6 +116,7 @@ Create an account, validate with MFA and login.
 <img src="assets/login_screen.png" width="400">
 
 <img src="assets/ss1.png" width="400">
+
 <img src="assets/ss2.png" width="400">
 
 ### This sets up hosting on cloudfront or from an S3 Bucket
