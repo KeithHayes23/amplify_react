@@ -146,6 +146,21 @@ After delete:
 
 ### CLI Commands
 
+Create sample data:
+In the src/assets directory is a python script called createDevices.py
+Open it and find the section
+DYNAMODB='ADD DYNAMODB TABLE ID HERE'
+Change the DYNAMODB variable to your dynamoDB table name that was created.
+It has the following dependencies:
+```
+pip install boto3 namegenerator faker
+```
+
+Run:
+```
+python src/assets/createDevices.py
+```
+
 ####Get the domain name
 ```
 aws es list-domain-names
