@@ -148,7 +148,9 @@ After delete:
 
 Create sample data:
 In the src/assets directory is a python script called createDevices.py
+
 Open it and find the section:
+
 DYNAMODB='ADD DYNAMODB TABLE ID HERE'
 
 Change the DYNAMODB variable to your dynamoDB table name that was created.
