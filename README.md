@@ -54,6 +54,10 @@ This command builds the backend. Check out Cloudformation to see what it is doin
 ```
 amplify push
 ```
+This takes 10 or more minutes. Creating the ElasticSearch is pretty slow.
+
+<img src="assets/install_ss3.png" width="400">
+
 One last thing I need to resolve. Using the amplify <Connect/> component only allows for 1 subscription. I am interested in Creates, Updates and Deletes so I add an consolidated subscription that notify's the app if any of those condition occur.
 Has to be a better way but until I figure that out here's a work around.
 
