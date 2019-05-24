@@ -183,5 +183,6 @@ aws es describe-elasticsearch-domain --domain-name
 
 ### TODO
 
-Implement search feature in app bar
-Implement CI/CD Pipeline for deployment
+Implement search feature in app bar: Done
+Re-add subsriptions to CardView for CRUD activities:
+Implement CI/CD Pipeline for deployment:
