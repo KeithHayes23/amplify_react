@@ -12,6 +12,10 @@ export const getDevice = `query GetDevice($id: ID!) {
     name
     type
     endpoint
+    location {
+      lon
+      lat
+    }
   }
 }
 `;
@@ -31,6 +35,27 @@ export const listDevices = `query ListDevices(
       name
       type
       endpoint
+      location {
+        lon
+        lat
+      }
+    }
+    nextToken
+  }
+}
+`;
+export const getGps = `query GetGps($id: ID!) {
+  getGPS(id: $id) {
+    lon
+    lat
+  }
+}
+`;
+export const listGpSs = `query ListGpSs($filter: ModelGPSFilterInput, $limit: Int, $nextToken: String) {
+  listGPSs(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      lon
+      lat
     }
     nextToken
   }
@@ -58,6 +83,10 @@ export const searchDevices = `query SearchDevices(
       name
       type
       endpoint
+      location {
+        lon
+        lat
+      }
     }
     nextToken
   }

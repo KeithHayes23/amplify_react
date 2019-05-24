@@ -12,6 +12,10 @@ export const onCreateDevice = `subscription OnCreateDevice {
     name
     type
     endpoint
+    location {
+      lon
+      lat
+    }
   }
 }
 `;
@@ -26,6 +30,10 @@ export const onUpdateDevice = `subscription OnUpdateDevice {
     name
     type
     endpoint
+    location {
+      lon
+      lat
+    }
   }
 }
 `;
@@ -40,42 +48,31 @@ export const onDeleteDevice = `subscription OnDeleteDevice {
     name
     type
     endpoint
+    location {
+      lon
+      lat
+    }
   }
 }
 `;
-export const onAnySubs = `subscription onAnySubs {
-  onDeleteDevice {
-    id
-    serialNumber
-    group
-    deviceId
-    activationCode
-    activated
-    name
-    type
-    endpoint
-  },
-  onUpdateDevice {
-    id
-    serialNumber
-    group
-    deviceId
-    activationCode
-    activated
-    name
-    type
-    endpoint
-  },
-  onCreateDevice {
-    id
-    serialNumber
-    group
-    deviceId
-    activationCode
-    activated
-    name
-    type
-    endpoint
+export const onCreateGps = `subscription OnCreateGps {
+  onCreateGPS {
+    lon
+    lat
+  }
+}
+`;
+export const onUpdateGps = `subscription OnUpdateGps {
+  onUpdateGPS {
+    lon
+    lat
+  }
+}
+`;
+export const onDeleteGps = `subscription OnDeleteGps {
+  onDeleteGPS {
+    lon
+    lat
   }
 }
 `;

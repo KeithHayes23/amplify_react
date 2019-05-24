@@ -11,11 +11,25 @@ import SearchBar from './SearchBar'
 import Device from './device/Device'
 
 const styles = {
+  card: {
+    minWidth: 275,
+  },
+  bullet: {
+    display: 'inline-block',
+    margin: '0 2px',
+    transform: 'scale(0.8)',
+  },
+  title: {
+    fontSize: 14,
+  },
+  pos: {
+    marginBottom: 12,
+  },
   root: {
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'inherit',
-    padding: '5px'
+    padding: '10px'
   },
 };
 
@@ -33,23 +47,16 @@ class CardView extends Component {
   constructor(){
     super();
     this.state = {
-      devices: []
+      items: null,
+      searchResults: null
     }
       this.handleSearch = this.handleSearch.bind(this);
   }
-
   componentDidMount() {
     this.listDevices();
   }
-
-  handleSearch = async (_string) => {
-    console.log(_string);
-    if(_string === ''){
-      console.log('Empty');
-      this.listDevices();
-      return;
-    }
-    const filter = {filter: { name : { matchPhrasePrefix : _string }}};
+  runMe = async (_string) => {
+    const filter = {filter: { name : { match : _string }}};
     const result = await API.graphql(graphqlOperation(queries.searchDevices, filter));
     console.log(result);
     var numDevices = result.data.searchDevices.items.length;
@@ -58,15 +65,13 @@ class CardView extends Component {
     }else {
       console.log(numDevices + ' Items');
     }
-    this.setState({devices:result.data.searchDevices.items});
+    this.setState({items:result.data.searchDevices.items});
   }
 
-  listDevices = async () => {
-      const devices = await API.graphql(graphqlOperation(queries.listDevices,{limit:25}));
-      console.log(devices);
-      this.setState({devices:devices.data.listDevices.items});
+  async listDevices(){
+      const devices = await API.graphql(graphqlOperation(queries.listDevices));
+      console.log(devices)
   }
-
 
   onNewItem = (prevQuery, newData) => {
     let updatedQuery = Object.assign({}, prevQuery);
@@ -90,12 +95,22 @@ class CardView extends Component {
   render(){
 
     const { classes } = this.props;
-    const renderComponent = this.state.renderComponent;
 
-
+    const runMe = async (_string) => {
+      const filter = {filter: { name : { match : _string }}};
+      const result = await API.graphql(graphqlOperation(queries.searchDevices, filter));
+      var numDevices = result.data.searchDevices.items.length;
+      if(numDevices === 0){
+        console.log('No Items');
+      }else {
+        console.log(numDevices + ' Items');
+      }
+      this.setState({items:result.data.searchDevices.items});
+    }
 
     const DeviceView = ({ devices }) => (
       <div >
+      <SearchBar getSearchString={this.runMe} />
       <Grid container className={classes.root} spacing={16}>
           {devices.map(device => (
              <Grid key={device.id} item>
@@ -105,12 +120,19 @@ class CardView extends Component {
          </Grid>
       </div>
     );
-
     return (
-      <div>
-        <SearchBar getSearchString={this.handleSearch} />
-        <DeviceView devices={this.state.devices} />
-      </div>
+      <Connect query={graphqlOperation(queries.listDevices, {limit:100})}
+        subscription={graphqlOperation(subscriptions.onAnySubs)}
+        onSubscriptionMsg={this.onNewItem}
+        >
+        {({ data: { listDevices }, loading, error }) => {
+            if (error) return (<h3>Error</h3>);
+            if (loading || !listDevices) return (<Loader/>);
+            this.state.items = listDevices.items
+            console.log('here');
+            return (<DeviceView devices={this.state.items} /> );
+        }}
+      </Connect>
     );
   }
 }

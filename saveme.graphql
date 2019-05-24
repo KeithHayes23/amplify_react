@@ -1,4 +1,4 @@
-type Device @model @searchable{
+type Device @model @searchable {
   id: ID!
   serialNumber: String!
   group: String!
@@ -8,4 +8,9 @@ type Device @model @searchable{
   name: String!
   type: String
   endpoint: String
+  location: GPS
+}
+type GPS @model {
+  lon: Float,
+  lat: Float
 }

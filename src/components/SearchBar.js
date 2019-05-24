@@ -59,27 +59,26 @@ const styles = theme => ({
 
 
 class SearchBar extends Component {
+  state = {
+    showRemoveIcon: false
+  };
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
-    this.searchString= this.props.searchString;
   }
 
   handleChange(event){
     event.preventDefault()
     const { target: { name, value } } = event;
-    this.searchString = value;
-    console.log(this.searchString);
-
-    this.props.getSearchString(this.searchString);
+    this.props.getSearchString(value);
   }
 
   render() {
     const { classes } = this.props;
     return (
       <div className={classes.root}>
-        <AppBar position="static" color="default">
-          <Toolbar>
+        <AppBar position="static">
+          <Toolbar variant="dense">
             <AddDevice/>
             <div className={classes.grow} />
             <div className={classes.search}>
@@ -94,7 +93,6 @@ class SearchBar extends Component {
                 }}
                 onChange={this.handleChange}
               />
-
             </div>
           </Toolbar>
         </AppBar>

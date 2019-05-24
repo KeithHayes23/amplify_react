@@ -21,7 +21,7 @@ yarn add aws-amplify aws-amplify-react
 ```
 ### UI Framework
 Currently I'm using Material UI
-
+https://www.materialui.co/icons
 ```
 yarn add @material-ui/core
 yarn add @material-ui/icons
@@ -114,6 +114,9 @@ Create an account, validate with MFA and login.
 
 <img src="assets/login_screen.png" width="400">
 
+<img src="assets/ss1.png" width="400">
+<img src="assets/ss2.png" width="400">
+
 ### This sets up hosting on cloudfront or from an S3 Bucket
 
 ```
@@ -127,7 +130,9 @@ amplify publish
 ```
 amplify delete
 ```
-Be sure to delete the src/aws-exports.json file.
+After delete:
+1. Be sure to delete the src/aws-exports.json file.
+2. You can run amplify init to restart the build process assuming you didn't delete the IAM user.
 
 
 
@@ -154,3 +159,4 @@ aws es describe-elasticsearch-domain --domain-name
 ### TODO
 
 Implement search feature in app bar
+Implement CI/CD Pipeline for deployment

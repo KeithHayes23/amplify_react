@@ -14,8 +14,9 @@ import Divider from '@material-ui/core/Divider';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import GroupIcon from '@material-ui/icons/Group';
 import DeviceIcon from '@material-ui/icons/DevicesOther';
+import LocationIcon from '@material-ui/icons/LocationOn';
 import SerialNumberIcon from '@material-ui/icons/ConfirmationNumber';
-import red from '@material-ui/core/colors/red';
+import indigo from '@material-ui/core/colors/indigo';
 
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
@@ -26,8 +27,14 @@ import EditDevice from './editDevice'
 import DeleteDevice from './deleteDevice'
 
 const styles = theme => ({
+  panel: {
+    minHeight: 105,
+    minWidth: 275,
+    maxWidth: 150,
+  },
   card: {
     minWidth: 275,
+    maxWidth: 150,
   },
   title: {
     fontSize: 14,
@@ -36,7 +43,7 @@ const styles = theme => ({
     display: 'flex',
   },
   avatar: {
-    backgroundColor: red[500],
+    backgroundColor: indigo[500],
   },
 });
 
@@ -47,7 +54,7 @@ class Device extends Component {
     return (
       <Card className={classes.card}>
         <ExpansionPanel>
-        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+        <ExpansionPanelSummary className={classes.panel} expandIcon={<ExpandMoreIcon />}>
         <CardHeader
            avatar={
              <Avatar className={classes.avatar}>
@@ -60,28 +67,32 @@ class Device extends Component {
         </ExpansionPanelSummary>
         <Divider light />
         <ExpansionPanelDetails>
-          <CardContent>
             <List dense>
               <ListItem>
                 <ListItemIcon>
-                  <GroupIcon/>
+                  <LocationIcon/>
+                  <ListItemText primary="lon: 0.0" secondary="lat: 0.0"  />
                 </ListItemIcon>
-                <ListItemText primary="Group" secondary={this.props.device.group}  />
+              </ListItem>
+              <ListItem>
+                <ListItemIcon>
+                  <GroupIcon/>
+                  <ListItemText primary="Group" secondary={this.props.device.group}  />
+                </ListItemIcon>
               </ListItem>
               <ListItem>
                 <ListItemIcon>
                   <DeviceIcon/>
+                  <ListItemText primary="Device Id" secondary={this.props.device.deviceId} />
                 </ListItemIcon>
-                <ListItemText primary="Device Id" secondary={this.props.device.deviceId} />
               </ListItem>
               <ListItem>
                 <ListItemIcon>
                   <SerialNumberIcon/>
+                  <ListItemText primary="Serial Number" secondary={this.props.device.serialNumber} />
                 </ListItemIcon>
-                <ListItemText primary="Serial Number" secondary={this.props.device.serialNumber} />
               </ListItem>
             </List>
-          </CardContent>
         </ExpansionPanelDetails>
         <Divider light />
         <ExpansionPanelActions>
