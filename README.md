@@ -48,6 +48,7 @@ This will change over time and I have it in the root directory of this project b
 ```
 amplify add api
 ```
+<img src="assets/install_ss2.png" width="400">
 
 This command builds the backend. Check out Cloudformation to see what it is doing.
 ```
