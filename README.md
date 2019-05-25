@@ -143,7 +143,7 @@ aws es describe-elasticsearch-domain --domain-name
 ### OBSOLETE
 
 Subscriptions are now handle individually using amplify API.
-A subsriptions for Create, Delete, and Update are all handled individually.
+A subscriptions for Create, Delete, and Update are all handled individually.
 Plus is seem <Connect/> gets triggered when use API so I removed it and handle them all individually.
 
 One last thing I need to resolve. Using the amplify <Connect/> component only allows for 1 subscription. I am interested in Creates, Updates and Deletes so I add an consolidated subscription that notify's the app if any of those condition occur.
