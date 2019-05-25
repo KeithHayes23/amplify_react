@@ -40,6 +40,9 @@ class CardView extends Component {
 
   componentDidMount() {
     this.listDevices();
+    this.subscribeCreateDevice();
+    this.subscribeUpdateDevice();
+    this.subscribeDeleteDevice();
   }
 
   handleSearch = async (_string) => {
@@ -67,32 +70,52 @@ class CardView extends Component {
       this.setState({devices:devices.data.listDevices.items});
   }
 
+  subscribeCreateDevice = async () => {
+    const subscription = API.graphql(
+      graphqlOperation(subscriptions.onCreateDevice)
+    ).subscribe({
+      next: deviceData => {
+        const data = deviceData.value.data.onCreateDevice
+        const devices = this.state.devices.concat(data)
+        this.setState({ devices })
+      }
+    });
+  }
 
-  onNewItem = (prevQuery, newData) => {
-    let updatedQuery = Object.assign({}, prevQuery);
-    var index;
-    //console.log(prevQuery.listDevices.items)
-    //console.log(newData)
-    if(newData.onCreateDevice) {
-        updatedQuery.listDevices.items = prevQuery.listDevices.items.concat([newData.onCreateDevice]);
-    } else if(newData.onDeleteDevice) {
-        index = findIndexByKeyValue(prevQuery.listDevices.items,"id",newData.onDeleteDevice.id)
-        updatedQuery.listDevices.items.splice(index,1);
-    } else if(newData.onUpdateDevice) {
-        index = findIndexByKeyValue(prevQuery.listDevices.items,"id",newData.onUpdateDevice.id)
-        Object.assign(updatedQuery.listDevices.items[index], newData.onUpdateDevice)
-    }else {
-      console.log('SO3B')
-    }
-    return updatedQuery;
+  subscribeUpdateDevice = async () => {
+    const subscription = API.graphql(
+      graphqlOperation(subscriptions.onUpdateDevice)
+    ).subscribe({
+      next: deviceData => {
+        const data = deviceData.value.data.onUpdateDevice
+        console.log(data)
+        var index = findIndexByKeyValue(this.state.devices,"id",data.id)
+        console.log(index)
+        Object.assign(this.state.devices[index], data)
+        const devices = this.state.devices
+        this.setState({ devices })
+      }
+    });
+  }
+
+  subscribeDeleteDevice = async () => {
+    const subscription = API.graphql(
+      graphqlOperation(subscriptions.onDeleteDevice)
+    ).subscribe({
+      next: deviceData => {
+        const data = deviceData.value.data.onDeleteDevice
+        var index = findIndexByKeyValue(this.state.devices,"id",data.id)
+        this.state.devices.splice(index,1);
+        const devices = this.state.devices
+        this.setState({ devices })
+      }
+    });
   }
 
   render(){
 
     const { classes } = this.props;
     const renderComponent = this.state.renderComponent;
-
-
 
     const DeviceView = ({ devices }) => (
       <div >

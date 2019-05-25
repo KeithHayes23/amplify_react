@@ -55,24 +55,3 @@ export const onDeleteDevice = `subscription OnDeleteDevice {
   }
 }
 `;
-export const onCreateGps = `subscription OnCreateGps {
-  onCreateGPS {
-    lon
-    lat
-  }
-}
-`;
-export const onUpdateGps = `subscription OnUpdateGps {
-  onUpdateGPS {
-    lon
-    lat
-  }
-}
-`;
-export const onDeleteGps = `subscription OnDeleteGps {
-  onDeleteGPS {
-    lon
-    lat
-  }
-}
-`;

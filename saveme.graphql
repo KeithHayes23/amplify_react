@@ -10,7 +10,7 @@ type Device @model @searchable {
   endpoint: String
   location: GPS
 }
-type GPS @model {
+type GPS {
   lon: Float,
   lat: Float
 }

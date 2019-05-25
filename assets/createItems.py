@@ -29,7 +29,7 @@ def lambda_handler(event, context):
     table = client.Table(DYNAMODB)
     print(table.table_status)
     i = 0
-    while i < 100:
+    while i < 10:
         i += 1
         UUID = str(uuid.uuid4())
         price = randint(1, 1000)

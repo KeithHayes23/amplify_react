@@ -9,7 +9,8 @@ from faker import Faker
 import datetime
 
 REGION='us-east-1'
-DYNAMODB='ADD DYNAMODB TABLE ID HERE'
+DYNAMODB='Device-7sbdtokhdneodid7rl5qwfbwqa-dev'
+
 
 # Helper class to convert a DynamoDB item to JSON.
 class DecimalEncoder(json.JSONEncoder):

@@ -71,26 +71,26 @@ class Device extends Component {
               <ListItem>
                 <ListItemIcon>
                   <LocationIcon/>
-                  <ListItemText primary="lon: 0.0" secondary="lat: 0.0"  />
                 </ListItemIcon>
+                <ListItemText primary="lon: 0.0" secondary="lat: 0.0"  />
               </ListItem>
               <ListItem>
                 <ListItemIcon>
                   <GroupIcon/>
-                  <ListItemText primary="Group" secondary={this.props.device.group}  />
                 </ListItemIcon>
+                <ListItemText primary="Group" secondary={this.props.device.group}  />
               </ListItem>
               <ListItem>
                 <ListItemIcon>
                   <DeviceIcon/>
-                  <ListItemText primary="Device Id" secondary={this.props.device.deviceId} />
                 </ListItemIcon>
+                <ListItemText primary="Device Id" secondary={this.props.device.deviceId} />
               </ListItem>
               <ListItem>
                 <ListItemIcon>
                   <SerialNumberIcon/>
-                  <ListItemText primary="Serial Number" secondary={this.props.device.serialNumber} />
                 </ListItemIcon>
+                <ListItemText primary="Serial Number" secondary={this.props.device.serialNumber} />
               </ListItem>
             </List>
         </ExpansionPanelDetails>

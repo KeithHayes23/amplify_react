@@ -55,24 +55,3 @@ export const deleteDevice = `mutation DeleteDevice($input: DeleteDeviceInput!) {
   }
 }
 `;
-export const createGps = `mutation CreateGps($input: CreateGPSInput!) {
-  createGPS(input: $input) {
-    lon
-    lat
-  }
-}
-`;
-export const updateGps = `mutation UpdateGps($input: UpdateGPSInput!) {
-  updateGPS(input: $input) {
-    lon
-    lat
-  }
-}
-`;
-export const deleteGps = `mutation DeleteGps($input: DeleteGPSInput!) {
-  deleteGPS(input: $input) {
-    lon
-    lat
-  }
-}
-`;

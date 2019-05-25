@@ -44,23 +44,6 @@ export const listDevices = `query ListDevices(
   }
 }
 `;
-export const getGps = `query GetGps($id: ID!) {
-  getGPS(id: $id) {
-    lon
-    lat
-  }
-}
-`;
-export const listGpSs = `query ListGpSs($filter: ModelGPSFilterInput, $limit: Int, $nextToken: String) {
-  listGPSs(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
-      lon
-      lat
-    }
-    nextToken
-  }
-}
-`;
 export const searchDevices = `query SearchDevices(
   $filter: SearchableDeviceFilterInput
   $sort: SearchableDeviceSortInput

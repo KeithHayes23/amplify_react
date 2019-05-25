@@ -58,6 +58,93 @@ This takes 10 or more minutes. Creating the ElasticSearch is pretty slow.
 
 <img src="assets/install_ss3.png" width="400">
 
+### Runs the app in the development mode.<br>
+Setup account, login, logout, forgot password, MFA is all handled for you by amplify.
+```
+amplify serve
+```
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Create an account, validate with MFA and login.
+
+<img src="assets/login_screen.png" width="400">
+
+<img src="assets/ss1.png" width="400">
+
+<img src="assets/ss2.png" width="400">
+
+### This sets up hosting on cloudfront or from an S3 Bucket
+
+```
+amplify add hosting
+amplify hosting configure
+amplify publish
+```
+
+
+### Deletes all backend resources and cleans up local archive
+```
+amplify delete
+```
+After delete:
+1. Be sure to delete the src/aws-exports.json file.
+2. You can run amplify init to restart the build process assuming you didn't delete the IAM user.
+
+
+
+### References
+
+The documentation for amplify is ok but real world examples are missing.
+So here is a list of useful links for referencing examples.
+1. https://amplify-workshop.go-aws.com/
+2. https://github.com/aws-samples/aws-amplify-graphql
+3. https://medium.com/open-graphql/create-a-multiuser-graphql-crud-l-app-in-10-minutes-with-the-new-aws-amplify-cli-and-in-a-few-73aef3d49545
+4. https://read.acloud.guru/build-your-own-multi-user-photo-album-app-with-react-graphql-and-aws-amplify-18d9cfe27f60
+5. https://medium.com/open-graphql/implementing-search-in-graphql-11d5f71f179
+6. https://amplify-workshop.go-aws.com/140_bonus/10_lightbox_photos.html
+7. https://code.tutsplus.com/tutorials/how-to-build-serverless-graphql-and-rest-apis-using-aws-amplify--cms-31873
+
+### CLI Commands
+
+Create sample data:
+In the src/assets directory is a python script called createDevices.py
+
+Open it and find the section:
+
+DYNAMODB='ADD DYNAMODB TABLE ID HERE'
+
+Change the DYNAMODB variable to your dynamoDB table name that was created.
+It has the following dependencies:
+```
+pip install boto3 namegenerator faker
+```
+
+Run:
+```
+python src/assets/createDevices.py
+```
+
+####Get the domain name
+```
+aws es list-domain-names
+```
+
+#### Find the domain endpoint
+```
+aws es describe-elasticsearch-domain --domain-name
+```
+
+### TODO
+
+1. Implement search feature in app bar: &#9745;
+2. Re-add subscriptions to CardView for CRUD activities: &#9745;
+3. Implement CI/CD Pipeline for deployment:
+
+### OBSOLETE
+
+Subscriptions are now handle individually using amplify API.
+A subsriptions for Create, Delete, and Update are all handled individually.
+Plus is seem <Connect/> gets triggered when use API so I removed it and handle them all individually.
+
 One last thing I need to resolve. Using the amplify <Connect/> component only allows for 1 subscription. I am interested in Creates, Updates and Deletes so I add an consolidated subscription that notify's the app if any of those condition occur.
 Has to be a better way but until I figure that out here's a work around.
 
@@ -109,80 +196,3 @@ export const onAnySubs = `subscription onAnySubs {
 }
 `;
 ```
-
-### Runs the app in the development mode.<br>
-Setup account, login, logout, forgot password, MFA is all handled for you by amplify.
-```
-amplify serve
-```
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-Create an account, validate with MFA and login.
-
-<img src="assets/login_screen.png" width="400">
-
-<img src="assets/ss1.png" width="400">
-
-<img src="assets/ss2.png" width="400">
-
-### This sets up hosting on cloudfront or from an S3 Bucket
-
-```
-amplify add hosting
-amplify hosting configure
-amplify publish
-```
-
-
-### Deletes all backend resources and cleans up local archive
-```
-amplify delete
-```
-After delete:
-1. Be sure to delete the src/aws-exports.json file.
-2. You can run amplify init to restart the build process assuming you didn't delete the IAM user.
-
-
-
-### References
-1. https://amplify-workshop.go-aws.com/
-2. https://github.com/aws-samples/aws-amplify-graphql
-3. https://medium.com/open-graphql/create-a-multiuser-graphql-crud-l-app-in-10-minutes-with-the-new-aws-amplify-cli-and-in-a-few-73aef3d49545
-4. https://read.acloud.guru/build-your-own-multi-user-photo-album-app-with-react-graphql-and-aws-amplify-18d9cfe27f60
-5. https://medium.com/open-graphql/implementing-search-in-graphql-11d5f71f179
-6. https://amplify-workshop.go-aws.com/140_bonus/10_lightbox_photos.html
-
-### CLI Commands
-
-Create sample data:
-In the src/assets directory is a python script called createDevices.py
-
-Open it and find the section:
-
-DYNAMODB='ADD DYNAMODB TABLE ID HERE'
-
-Change the DYNAMODB variable to your dynamoDB table name that was created.
-It has the following dependencies:
-```
-pip install boto3 namegenerator faker
-```
-
-Run:
-```
-python src/assets/createDevices.py
-```
-
-####Get the domain name
-```
-aws es list-domain-names
-```
-
-#### Find the domain endpoint
-```
-aws es describe-elasticsearch-domain --domain-name
-```
-
-### TODO
-
-1. Implement search feature in app bar: &#9745;
-2. Re-add subsriptions to CardView for CRUD activities:
-3. Implement CI/CD Pipeline for deployment:
