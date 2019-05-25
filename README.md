@@ -102,6 +102,7 @@ So here is a list of useful links for referencing examples.
 5. https://medium.com/open-graphql/implementing-search-in-graphql-11d5f71f179
 6. https://amplify-workshop.go-aws.com/140_bonus/10_lightbox_photos.html
 7. https://code.tutsplus.com/tutorials/how-to-build-serverless-graphql-and-rest-apis-using-aws-amplify--cms-31873
+8. https://devexpress.github.io/devextreme-reactive/react/grid/demos/featured/integrated-data-shaping/
 
 ### CLI Commands
 
