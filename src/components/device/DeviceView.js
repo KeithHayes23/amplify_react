@@ -4,11 +4,11 @@ import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import {API, graphqlOperation }  from "aws-amplify";
 import { Connect } from "aws-amplify-react";
-import * as queries from '../graphql/queries';
-import * as subscriptions from '../graphql/subscriptions';
-import Loader from './Loader';
+import * as queries from '../../graphql/queries';
+import * as subscriptions from '../../graphql/subscriptions';
+import Loader from '../common/Loader';
 import SearchBar from './SearchBar'
-import Device from './device/Device'
+import Device from './Device'
 
 const styles = {
   root: {
@@ -29,11 +29,13 @@ function findIndexByKeyValue(obj, key, value)
     return null;
 }
 
-class CardView extends Component {
+class DeviceView extends Component {
   constructor(){
     super();
     this.state = {
-      devices: []
+      devices: [],
+      showCard: true
+
     }
       this.handleSearch = this.handleSearch.bind(this);
   }
@@ -114,10 +116,13 @@ class CardView extends Component {
 
   render(){
 
+    const showCard = this.state.showCard;
+    let view;
+
     const { classes } = this.props;
     const renderComponent = this.state.renderComponent;
 
-    const DeviceView = ({ devices }) => (
+    const CardView = ({ devices }) => (
       <div >
       <Grid container className={classes.root} spacing={16}>
           {devices.map(device => (
@@ -129,17 +134,23 @@ class CardView extends Component {
       </div>
     );
 
+    if(showCard) {
+      view = <CardView devices={this.state.devices} />
+    }else {
+
+    }
+
     return (
       <div>
         <SearchBar getSearchString={this.handleSearch} />
-        <DeviceView devices={this.state.devices} />
+        {view}
       </div>
     );
   }
 }
 
-CardView.propTypes = {
+DeviceView.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(CardView);
+export default withStyles(styles)(DeviceView);

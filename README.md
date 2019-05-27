@@ -25,6 +25,7 @@ https://www.materialui.co/icons
 ```
 yarn add @material-ui/core
 yarn add @material-ui/icons
+yarn add @material-ui/lab
 ```
 
 ### Setup AWS Backend
@@ -54,9 +55,13 @@ This command builds the backend. Check out Cloudformation to see what it is doin
 ```
 amplify push
 ```
-This takes 10 or more minutes. Creating the ElasticSearch is pretty slow.
+This takes about 20 minutes. Creating the ElasticSearch is pretty slow.
 
 <img src="assets/install_ss3.png" width="400">
+
+Amplify uses nested CloudFormation stacks to build the environment.
+
+<img src="assets/install_ss4.png" width="400">
 
 ### Runs the app in the development mode.<br>
 Setup account, login, logout, forgot password, MFA is all handled for you by amplify.

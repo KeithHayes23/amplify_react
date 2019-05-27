@@ -5,7 +5,8 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import SearchIcon from '@material-ui/icons/Search';
 import { fade } from '@material-ui/core/styles/colorManipulator';
-import AddDevice from './device/addDevice'
+import AddDevice from './addDevice';
+import DeviceMenu from './DeviceMenu'
 
 const styles = theme => ({
   root: {
@@ -58,9 +59,10 @@ const styles = theme => ({
 });
 
 
-class SearchBar extends Component {
+class DeviceSearchBar extends Component {
   state = {
-    showRemoveIcon: false
+    showRemoveIcon: false,
+    changeView: false
   };
   constructor(props) {
     super(props);
@@ -73,6 +75,12 @@ class SearchBar extends Component {
     this.props.getSearchString(value);
   }
 
+  handleSwitchView(event){
+    event.preventDefault()
+    const { target: { name, value } } = event;
+    //this.props.getSearchString(value);
+  }
+
   render() {
     const { classes } = this.props;
     return (
@@ -80,6 +88,7 @@ class SearchBar extends Component {
         <AppBar position="static">
           <Toolbar variant="dense">
             <AddDevice/>
+            <DeviceMenu/>
             <div className={classes.grow} />
             <div className={classes.search}>
               <div className={classes.searchIcon}>
@@ -101,4 +110,4 @@ class SearchBar extends Component {
   }
 }
 
-export default withStyles(styles)(SearchBar);
+export default withStyles(styles)(DeviceSearchBar);

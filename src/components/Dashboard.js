@@ -12,7 +12,7 @@ import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import CardView from '../components/CardView'
+import DeviceView from './device/DeviceView'
 import {mainMenuItems} from '../components/LeftMenuView'
 
 import JSignOut from '../components/auth/JSignOut';
@@ -162,7 +162,7 @@ class Dashboard extends React.Component {
        </Drawer>
        <main className={classes.content}>
           <div className={classes.appBarSpacer} />
-          <CardView/>
+          <DeviceView/>
        </main>
      </div>
    );
