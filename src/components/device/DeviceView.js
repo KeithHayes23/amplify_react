@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import {API, graphqlOperation }  from "aws-amplify";
-import { Connect } from "aws-amplify-react";
 import * as queries from '../../graphql/queries';
 import * as subscriptions from '../../graphql/subscriptions';
 import Loader from '../common/Loader';
-import SearchBar from './SearchBar'
-import Device from './Device'
+import DeviceSearchBar from './DeviceSearchBar';
+import Device from './Device';
+import DeviceTableView from './DeviceTableView';
 
 const styles = {
   root: {
@@ -34,10 +34,10 @@ class DeviceView extends Component {
     super();
     this.state = {
       devices: [],
-      showCard: true
-
+      currentView: 'DEVICE_VIEW'
     }
       this.handleSearch = this.handleSearch.bind(this);
+      this.handleSwitchView =  this.handleSwitchView.bind(this);
   }
 
   componentDidMount() {
@@ -45,6 +45,15 @@ class DeviceView extends Component {
     this.subscribeCreateDevice();
     this.subscribeUpdateDevice();
     this.subscribeDeleteDevice();
+  }
+
+  handleSwitchView(name) {
+    if (name === this.state.currentView){
+    } else {
+      this.setState({
+        currentView: name
+      })
+    }
   }
 
   handleSearch = async (_string) => {
@@ -68,7 +77,6 @@ class DeviceView extends Component {
 
   listDevices = async () => {
       const devices = await API.graphql(graphqlOperation(queries.listDevices,{limit:25}));
-      console.log(devices);
       this.setState({devices:devices.data.listDevices.items});
   }
 
@@ -116,7 +124,7 @@ class DeviceView extends Component {
 
   render(){
 
-    const showCard = this.state.showCard;
+    const currentView = this.state.currentView;
     let view;
 
     const { classes } = this.props;
@@ -134,15 +142,16 @@ class DeviceView extends Component {
       </div>
     );
 
-    if(showCard) {
-      view = <CardView devices={this.state.devices} />
-    }else {
 
+    if(currentView === 'CARD_VIEW') {
+      view = <CardView devices={this.state.devices} />
+    }else if(currentView === 'DEVICE_VIEW'){
+      view = <DeviceTableView />
     }
 
     return (
       <div>
-        <SearchBar getSearchString={this.handleSearch} />
+        <DeviceSearchBar getSearchString={this.handleSearch} handleSwitchView={this.handleSwitchView}/>
         {view}
       </div>
     );

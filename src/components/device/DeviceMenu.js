@@ -8,6 +8,11 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ViewListIcon from '@material-ui/icons/ViewList'
 import ViewModuleIcon from '@material-ui/icons/ViewModule'
 
+const options = [
+  'Card View',
+  'List View',
+];
+
 const StyledMenu = withStyles({
   paper: {
     border: '1px solid #d3d4d5',
@@ -28,19 +33,10 @@ const StyledMenu = withStyles({
   />
 ));
 
-const StyledMenuItem = withStyles(theme => ({
-  root: {
-    '&:focus': {
-      backgroundColor: theme.palette.primary.main,
-      '& .MuiListItemIcon-root, & .MuiListItemText-primary': {
-        color: theme.palette.common.white,
-      },
-    },
-  },
-}))(MenuItem);
 
-function DeviceMenu() {
+function DeviceMenu(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [selectedIndex, setSelectedIndex] = React.useState(1);
 
   const StyledMenuItem = withStyles(theme => ({
     root: {
@@ -57,8 +53,22 @@ function DeviceMenu() {
     setAnchorEl(event.currentTarget);
   }
 
-  function handleClose() {
+  function handleClose(event) {
     setAnchorEl(null);
+  }
+
+  function handleMenuItemClick(event, index) {
+    setSelectedIndex(index);
+    setAnchorEl(null);
+    let name;
+
+    if(index === 0){
+      name = 'CARD_VIEW'
+    }
+    else if(index === 1){
+      name = 'DEVICE_VIEW'
+    }
+    props.handleSwitchView(name);
   }
 
   return (
@@ -72,23 +82,20 @@ function DeviceMenu() {
           Menu
         </Button>
         <StyledMenu
-          id="simple-menu"
+          id="device-menu"
           anchorEl={anchorEl}
           open={Boolean(anchorEl)}
           onClose={handleClose}
         >
-          <StyledMenuItem onClick={handleClose}>
-            <ListItemIcon>
-              <ViewListIcon />
-            </ListItemIcon>
-            <ListItemText primary="Table View" />
+        {options.map((option, index) => (
+          <StyledMenuItem
+            key={option}
+            onClick={event => handleMenuItemClick(event, index)}
+          >
+            {option}
           </StyledMenuItem>
-          <StyledMenuItem onClick={handleClose}>
-            <ListItemIcon>
-              <ViewModuleIcon />
-            </ListItemIcon>
-            <ListItemText primary="Card View" />
-          </StyledMenuItem>
+        ))}
+
         </StyledMenu>
       </div>
   );

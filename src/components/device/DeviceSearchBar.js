@@ -67,6 +67,7 @@ class DeviceSearchBar extends Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
+    this.handleSwitchView = this.handleSwitchView.bind(this);
   }
 
   handleChange(event){
@@ -75,10 +76,8 @@ class DeviceSearchBar extends Component {
     this.props.getSearchString(value);
   }
 
-  handleSwitchView(event){
-    event.preventDefault()
-    const { target: { name, value } } = event;
-    //this.props.getSearchString(value);
+  handleSwitchView(name){
+    this.props.handleSwitchView(name);
   }
 
   render() {
@@ -88,7 +87,7 @@ class DeviceSearchBar extends Component {
         <AppBar position="static">
           <Toolbar variant="dense">
             <AddDevice/>
-            <DeviceMenu/>
+            <DeviceMenu handleSwitchView={this.handleSwitchView}/>
             <div className={classes.grow} />
             <div className={classes.search}>
               <div className={classes.searchIcon}>

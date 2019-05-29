@@ -9,7 +9,7 @@ from faker import Faker
 import datetime
 
 REGION='us-east-1'
-DYNAMODB='Device-7sbdtokhdneodid7rl5qwfbwqa-dev'
+DYNAMODB='Device-cstodie7ijcjvj5wvzygnw4pei-dev'
 
 
 # Helper class to convert a DynamoDB item to JSON.
@@ -43,7 +43,7 @@ def lambda_handler(event, context):
     #endpoint: ''
 
     fake = Faker()
-    while i < 100:
+    while i < 1000:
         i += 1
         id = str(uuid.uuid4())
         name = namegenerator.gen()
@@ -52,6 +52,9 @@ def lambda_handler(event, context):
         serialNumber = randint(10000, 100000)
         createdAt = datetime.datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%S.%f')[:-3] + 'Z'
         updatedAt = createdAt
+        type = 'Default'
+        activated = 'On'
+        location = [47, -122]
         response = table.put_item(Item= {
             'id':id,
             'name':name,
@@ -59,7 +62,9 @@ def lambda_handler(event, context):
             'deviceId':deviceId,
             'serialNumber':serialNumber,
             'createdAt':createdAt,
-            'updatedAt':updatedAt
+            'updatedAt':updatedAt,
+            'activated':activated,
+            'type':type
         })
         print(json.dumps(response, indent=4, cls=DecimalEncoder))
 
