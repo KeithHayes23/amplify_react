@@ -14,7 +14,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import DeviceView from './device/DeviceView'
 import {mainMenuItems} from '../components/LeftMenuView'
-
+import DrawerList from '../components/DrawerList'
 import JSignOut from '../components/auth/JSignOut';
 
 const drawerWidth = 240;
@@ -116,7 +116,7 @@ class Dashboard extends React.Component {
      <div className={classes.root}>
        <CssBaseline />
        <AppBar color="default"
-         position="absolute"
+         position="fixed"
          className={classNames(classes.appBar, this.state.open && classes.appBarShift)}
        >
          <Toolbar disableGutters={!this.state.open} className={classes.toolbar}>
@@ -156,7 +156,7 @@ class Dashboard extends React.Component {
            </IconButton>
          </div>
          <Divider />
-         <List>{mainMenuItems}</List>
+         <DrawerList/>
          <Divider />
 
        </Drawer>

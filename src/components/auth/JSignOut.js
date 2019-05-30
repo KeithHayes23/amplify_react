@@ -3,18 +3,6 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import CommonButton from '../common/CommonButton'
 import { Auth } from 'aws-amplify';
 
-const styles = theme => ({
-  fab: {
-    margin: theme.spacing.unit * 2,
-  },
-  absolute: {
-    position: 'absolute',
-    bottom: theme.spacing.unit * 2,
-    right: theme.spacing.unit * 3,
-  },
-});
-
-
 export default class JSignOut extends Component {
   state = {
     info: {}

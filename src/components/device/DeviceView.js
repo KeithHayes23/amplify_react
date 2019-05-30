@@ -1,23 +1,12 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
 import {API, graphqlOperation }  from "aws-amplify";
 import * as queries from '../../graphql/queries';
 import * as subscriptions from '../../graphql/subscriptions';
-import Loader from '../common/Loader';
 import DeviceSearchBar from './DeviceSearchBar';
-import Device from './Device';
 import DeviceTableView from './DeviceTableView';
-
-const styles = {
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'inherit',
-    padding: '5px'
-  },
-};
+import DeviceCardView from './DeviceCardView';
+import Paper from '@material-ui/core/Paper';
+import Divider from '@material-ui/core/Divider';
 
 function findIndexByKeyValue(obj, key, value)
 {
@@ -34,7 +23,7 @@ class DeviceView extends Component {
     super();
     this.state = {
       devices: [],
-      currentView: 'DEVICE_VIEW'
+      currentView: 'LIST_VIEW'
     }
       this.handleSearch = this.handleSearch.bind(this);
       this.handleSwitchView =  this.handleSwitchView.bind(this);
@@ -65,7 +54,6 @@ class DeviceView extends Component {
     }
     const filter = {filter: { name : { matchPhrasePrefix : _string }}};
     const result = await API.graphql(graphqlOperation(queries.searchDevices, filter));
-    console.log(result);
     var numDevices = result.data.searchDevices.items.length;
     if(numDevices === 0){
       console.log('No Items');
@@ -76,12 +64,12 @@ class DeviceView extends Component {
   }
 
   listDevices = async () => {
-      const devices = await API.graphql(graphqlOperation(queries.listDevices,{limit:25}));
+      const devices = await API.graphql(graphqlOperation(queries.listDevices,{limit:1000}));
       this.setState({devices:devices.data.listDevices.items});
   }
 
   subscribeCreateDevice = async () => {
-    const subscription = API.graphql(
+    API.graphql(
       graphqlOperation(subscriptions.onCreateDevice)
     ).subscribe({
       next: deviceData => {
@@ -93,7 +81,7 @@ class DeviceView extends Component {
   }
 
   subscribeUpdateDevice = async () => {
-    const subscription = API.graphql(
+    API.graphql(
       graphqlOperation(subscriptions.onUpdateDevice)
     ).subscribe({
       next: deviceData => {
@@ -109,7 +97,7 @@ class DeviceView extends Component {
   }
 
   subscribeDeleteDevice = async () => {
-    const subscription = API.graphql(
+    API.graphql(
       graphqlOperation(subscriptions.onDeleteDevice)
     ).subscribe({
       next: deviceData => {
@@ -127,39 +115,20 @@ class DeviceView extends Component {
     const currentView = this.state.currentView;
     let view;
 
-    const { classes } = this.props;
-    const renderComponent = this.state.renderComponent;
-
-    const CardView = ({ devices }) => (
-      <div >
-      <Grid container className={classes.root} spacing={16}>
-          {devices.map(device => (
-             <Grid key={device.id} item>
-                 <Device device={device}/>
-             </Grid>
-             ))}
-         </Grid>
-      </div>
-    );
-
-
     if(currentView === 'CARD_VIEW') {
-      view = <CardView devices={this.state.devices} />
-    }else if(currentView === 'DEVICE_VIEW'){
-      view = <DeviceTableView />
+      view = <DeviceCardView devices={this.state.devices} />
+    }else if(currentView === 'LIST_VIEW'){
+      view = <DeviceTableView devices={this.state.devices} />
     }
 
     return (
-      <div>
+      <Paper style={{ position: 'relative' }}>
         <DeviceSearchBar getSearchString={this.handleSearch} handleSwitchView={this.handleSwitchView}/>
+        <Divider light />
         {view}
-      </div>
+      </Paper>
     );
   }
 }
 
-DeviceView.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
-
-export default withStyles(styles)(DeviceView);
+export default DeviceView;

@@ -6,7 +6,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import FormGroup from '@material-ui/core/FormGroup';
 import AddIcon from '@material-ui/icons/Add';
-import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
 import { API, graphqlOperation } from "aws-amplify";
 import * as mutations from '../../graphql/mutations';
 import { withStyles } from '@material-ui/core/styles';
@@ -76,9 +76,9 @@ class AddDevice extends Component {
     const { classes } = this.props;
       return (
       <div style={{display: 'flex', flexWrap: 'wrap'}}>
-      <Button  mini color="inherit" aria-label="Add" onClick={this.handleClickOpen}>
+      <IconButton  mini color="primary" aria-label="Add" onClick={this.handleClickOpen}>
         <AddIcon />
-      </Button>
+      </IconButton>
 
         <Dialog
           open={this.state.open}
@@ -123,12 +123,12 @@ class AddDevice extends Component {
             </FormGroup>
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleClose} color="primary">
+            <IconButton onClick={this.handleClose} color="primary">
               Cancel
-            </Button>
-            <Button onClick={this.handleSubmit} color="primary">
+            </IconButton>
+            <IconButton onClick={this.handleSubmit} color="primary">
               Add Item
-            </Button>
+            </IconButton>
           </DialogActions>
         </Dialog>
       </div>

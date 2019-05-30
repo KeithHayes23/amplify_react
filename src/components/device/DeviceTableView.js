@@ -1,25 +1,32 @@
 import React, { Component } from 'react';
-import Paper from '@material-ui/core/Paper';
 
 import {
         Grid,
-        VirtualTable, TableHeaderRow, TableFilterRow, TableSelection, TableGroupRow,
-        GroupingPanel, DragDropProvider, TableColumnReordering, Toolbar, SearchPanel,
+        VirtualTable, TableHeaderRow, TableFilterRow, TableSelection,
+        Toolbar,
       } from '@devexpress/dx-react-grid-material-ui';
 
 import {
-         SortingState, SelectionState, FilteringState, GroupingState, SearchState,
-         IntegratedFiltering, IntegratedGrouping, IntegratedSorting, IntegratedSelection,
+         SelectionState, FilteringState, GroupingState,
+         IntegratedFiltering, IntegratedGrouping, IntegratedSelection,
        } from '@devexpress/dx-react-grid';
 
 import {API, graphqlOperation }  from "aws-amplify";
 import * as queries from '../../graphql/queries';
 
+const styles = {
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'inherit',
+    padding: '5px'
+  },
+};
+
 class DeviceTableView extends Component {
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.state = {
-      devices: [],
       columns: [
         { name: 'name', title: 'Name' },
         { name: 'group', title: 'Group' },
@@ -28,14 +35,11 @@ class DeviceTableView extends Component {
         { name: 'activated', title: 'Activated' },
         { name: 'type', title: 'Type' },
       ],
-      loading: true,
-      nextToken: null,
-      totalCount: 0,
       pageSize: 1000,
     }
   }
   componentDidMount() {
-    this.listDevices();
+
   }
 
   listDevices = async () => {
@@ -47,19 +51,15 @@ class DeviceTableView extends Component {
       const {items, nextToken } = devices.data.listDevices;
       this.setState({devices:items, nextToken:nextToken});
   }
+
   render() {
-    const { devices,
-            columns,
-            pageSize,
-            loading,
-          } = this.state;
+    const { columns } = this.state;
+    const { classes, devices } = this.props;
+
     return (
-      <Paper style={{ position: 'relative' }}>
-        <Grid
+        <Grid container className={classes.root} spacing={16}
           rows={devices}
           columns={columns}>
-
-          <SearchState />
           <SelectionState />
           <IntegratedSelection />
           <FilteringState />
@@ -67,18 +67,13 @@ class DeviceTableView extends Component {
           <GroupingState/>
           <IntegratedGrouping />
           <VirtualTable />
-
           <TableHeaderRow/>
           <TableSelection showSelectAll />
           <TableFilterRow showFilterSelector />
-          <Toolbar />
-          <SearchPanel />
 
         </Grid>
-
-      </Paper>
     );
   }
 }
 
-export default DeviceTableView;
+export default withStyles(styles)(DeviceTableView);

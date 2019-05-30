@@ -121,6 +121,12 @@ Open it and find the section:
 DYNAMODB='ADD DYNAMODB TABLE ID HERE'
 
 Change the DYNAMODB variable to your dynamoDB table name that was created.
+
+To find the table name run this from the command line:
+```
+aws dynamodb list-tables
+```
+
 It has the following dependencies:
 ```
 pip install boto3 namegenerator faker

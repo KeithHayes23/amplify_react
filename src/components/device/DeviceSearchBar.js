@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import InputBase from '@material-ui/core/InputBase';
-import AppBar from '@material-ui/core/AppBar';
+import Grid from '@material-ui/core/Grid';
 import Toolbar from '@material-ui/core/Toolbar';
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import AddDevice from './addDevice';
 import DeviceMenu from './DeviceMenu'
+import ViewListIcon from '@material-ui/icons/ViewList';
+import ViewModuleIcon from '@material-ui/icons/ViewModule';
 
 const styles = theme => ({
   root: {
@@ -67,33 +71,46 @@ class DeviceSearchBar extends Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
-    this.handleSwitchView = this.handleSwitchView.bind(this);
+    this.handleListView = this.handleListView.bind(this);
+    this.handleCardView = this.handleCardView.bind(this);
   }
 
   handleChange(event){
     event.preventDefault()
-    const { target: { name, value } } = event;
+    const { target: { value } } = event;
     this.props.getSearchString(value);
   }
 
-  handleSwitchView(name){
-    this.props.handleSwitchView(name);
+  handleCardView(event){
+    console.log("card")
+    this.props.handleSwitchView('CARD_VIEW')
+  }
+
+  handleListView(event){
+    console.log("list")
+    this.props.handleSwitchView('LIST_VIEW')
   }
 
   render() {
     const { classes } = this.props;
     return (
       <div className={classes.root}>
-        <AppBar position="static">
+        <Grid >
           <Toolbar variant="dense">
             <AddDevice/>
-            <DeviceMenu handleSwitchView={this.handleSwitchView}/>
+            <IconButton className={classes.button} onClick={this.handleListView} aria-label="ListView" color="primary">
+              <ViewListIcon />
+            </IconButton>
+            <IconButton className={classes.button} onClick={this.handleCardView} aria-label="CardView" color="primary">
+              <ViewModuleIcon />
+            </IconButton>
             <div className={classes.grow} />
             <div className={classes.search}>
               <div className={classes.searchIcon}>
-                <SearchIcon />
+                <SearchIcon color='primary'/>
               </div>
               <InputBase
+
                 placeholder="Search…"
                 classes={{
                   root: classes.inputRoot,
@@ -103,7 +120,7 @@ class DeviceSearchBar extends Component {
               />
             </div>
           </Toolbar>
-        </AppBar>
+        </Grid>
       </div>
     );
   }
