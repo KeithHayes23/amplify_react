@@ -1,4 +1,5 @@
 from __future__ import print_function # Python 2/3 compatibility
+import os
 import boto3
 import json
 import decimal
@@ -8,9 +9,12 @@ import namegenerator
 from faker import Faker
 import datetime
 
-REGION='us-east-1'
-DYNAMODB='ADD DYNAMODB TABLE ID HERE'
+NUM_DEVICES=100
 
+#########################
+# DO NOT EDIT BELOW HERE
+#########################
+DYNAMODB=os.environ["DYNAMODB_TABLE"]
 
 # Helper class to convert a DynamoDB item to JSON.
 class DecimalEncoder(json.JSONEncoder):
@@ -31,6 +35,10 @@ def lambda_handler(event, context):
 
         # this will search for dynamoDB table
         # your table name may be different
+        if(DYNAMODB == ''):
+            print('You need to set the DYNAMODB_TABLE environment variable to continue.')
+            exit(0);
+
         table = client.Table(DYNAMODB)
         print(table.table_status)
         i = 0
@@ -44,7 +52,7 @@ def lambda_handler(event, context):
         #endpoint: ''
 
         fake = Faker()
-        while i < 1000:
+        while i < NUM_DEVICES:
             i += 1
             id = str(uuid.uuid4())
             name = namegenerator.gen()

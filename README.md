@@ -22,6 +22,7 @@ yarn add aws-amplify aws-amplify-react
 ### UI Framework
 Currently I'm using Material UI
 https://www.materialui.co/icons
+
 ```
 yarn install
 ```
@@ -77,6 +78,14 @@ Create an account, validate with MFA and login.
 
 <img src="assets/ss3.png" width="400">
 
+### amplify serve has errors.
+Do this in the root directory of your app:
+```
+rm -rf node_module
+rm yarn.lock
+yarn install
+```
+
 ### This sets up hosting on cloudfront or from an S3 Bucket
 
 ```
@@ -116,18 +125,21 @@ So here is a list of useful links for referencing examples.
 Create sample data:
 In the src/assets directory is a python script called createDevices.py
 
-Open it and find the section:
+In order for the the script to run you need an environment variable called:
 
-DYNAMODB='ADD DYNAMODB TABLE ID HERE'
+DYNAMODB_TABLE
 
-Change the DYNAMODB variable to your dynamoDB table name that was created.
-
-To find the table name run this from the command line:
+To find the dynamodb table name run this from the command line:
 ```
 aws dynamodb list-tables
 ```
+The export it like this:
+export DYNAMODB_TABLE=ENTER_YOUR_TABLE_NAME_HERE
 
-It has the following dependencies:
+Number of device is set to 100. You can change the NUM_DEVICES global variable in the script if you want.
+NUM_DEVICE=100
+
+The script has the following dependencies:
 ```
 pip install boto3 namegenerator faker
 ```

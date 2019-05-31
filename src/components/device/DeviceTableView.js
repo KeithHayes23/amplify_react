@@ -1,9 +1,8 @@
-import React, { Component } from 'react';
-
+import React from 'react';
+import { withStyles } from '@material-ui/core/styles';
 import {
         Grid,
         VirtualTable, TableHeaderRow, TableFilterRow, TableSelection,
-        Toolbar,
       } from '@devexpress/dx-react-grid-material-ui';
 
 import {
@@ -23,7 +22,7 @@ const styles = {
   },
 };
 
-class DeviceTableView extends Component {
+class DeviceTableView extends React.PureComponent {
   constructor(props){
     super(props);
     this.state = {

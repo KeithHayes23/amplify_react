@@ -6,14 +6,12 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import DeviceView from './device/DeviceView'
-import {mainMenuItems} from '../components/LeftMenuView'
 import DrawerList from '../components/DrawerList'
 import JSignOut from '../components/auth/JSignOut';
 
@@ -73,15 +71,15 @@ const styles = theme => ({
      easing: theme.transitions.easing.sharp,
      duration: theme.transitions.duration.leavingScreen,
    }),
-   width: theme.spacing.unit * 7,
+   width: theme.spacing(7),
    [theme.breakpoints.up('sm')]: {
-     width: theme.spacing.unit * 9,
+     width: theme.spacing(9),
    },
  },
  appBarSpacer: theme.mixins.toolbar,
  content: {
    flexGrow: 1,
-   padding: theme.spacing.unit * 1,
+   padding: theme.spacing(1),
    height: '100vh',
    overflow: 'auto',
  },
@@ -92,13 +90,13 @@ const styles = theme => ({
    height: 320,
  },
  h5: {
-   marginBottom: theme.spacing.unit * 2,
+   marginBottom: theme.spacing(2),
  },
 });
 
 class Dashboard extends React.Component {
  state = {
-   open: true,
+   open: false,
  };
 
  handleDrawerOpen = () => {

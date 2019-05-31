@@ -3,12 +3,10 @@ import { withStyles } from '@material-ui/core/styles';
 import InputBase from '@material-ui/core/InputBase';
 import Grid from '@material-ui/core/Grid';
 import Toolbar from '@material-ui/core/Toolbar';
-import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import AddDevice from './addDevice';
-import DeviceMenu from './DeviceMenu'
 import ViewListIcon from '@material-ui/icons/ViewList';
 import ViewModuleIcon from '@material-ui/icons/ViewModule';
 
@@ -29,12 +27,12 @@ const styles = theme => ({
     marginLeft: 0,
     width: '100%',
     [theme.breakpoints.up('sm')]: {
-      marginLeft: theme.spacing.unit,
+      marginLeft: theme.spacing(1),
       width: 'auto',
     },
   },
   searchIcon: {
-    width: theme.spacing.unit * 9,
+    width: theme.spacing(9),
     height: '100%',
     position: 'absolute',
     pointerEvents: 'none',
@@ -47,10 +45,10 @@ const styles = theme => ({
     width: '100%',
   },
   inputInput: {
-    paddingTop: theme.spacing.unit,
-    paddingRight: theme.spacing.unit,
-    paddingBottom: theme.spacing.unit,
-    paddingLeft: theme.spacing.unit * 10,
+    paddingTop: theme.spacing(1),
+    paddingRight: theme.spacing(1),
+    paddingBottom: theme.spacing(1),
+    paddingLeft: theme.spacing(10),
     transition: theme.transitions.create('width'),
     width: '100%',
     [theme.breakpoints.up('sm')]: {
@@ -82,12 +80,10 @@ class DeviceSearchBar extends Component {
   }
 
   handleCardView(event){
-    console.log("card")
     this.props.handleSwitchView('CARD_VIEW')
   }
 
   handleListView(event){
-    console.log("list")
     this.props.handleSwitchView('LIST_VIEW')
   }
 
@@ -95,7 +91,7 @@ class DeviceSearchBar extends Component {
     const { classes } = this.props;
     return (
       <div className={classes.root}>
-        <Grid >
+        <Grid>
           <Toolbar variant="dense">
             <AddDevice/>
             <IconButton className={classes.button} onClick={this.handleListView} aria-label="ListView" color="primary">

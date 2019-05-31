@@ -18,8 +18,8 @@ const styles = theme => ({
     flexWrap: 'wrap',
   },
   textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
     width: 200,
   },
   dense: {
@@ -76,7 +76,7 @@ class AddDevice extends Component {
     const { classes } = this.props;
       return (
       <div style={{display: 'flex', flexWrap: 'wrap'}}>
-      <IconButton  mini color="primary" aria-label="Add" onClick={this.handleClickOpen}>
+      <IconButton color="primary" aria-label="Add" onClick={this.handleClickOpen}>
         <AddIcon />
       </IconButton>
 

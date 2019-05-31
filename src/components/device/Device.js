@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
 import { withStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
 import List from '@material-ui/core/List';
@@ -14,7 +12,9 @@ import DeviceIcon from '@material-ui/icons/DevicesOther';
 import LocationIcon from '@material-ui/icons/LocationOn';
 import SerialNumberIcon from '@material-ui/icons/ConfirmationNumber';
 import indigo from '@material-ui/core/colors/indigo';
-
+import Typography from '@material-ui/core/Typography';
+import CardHeader from '@material-ui/core/CardHeader';
+import Card from '@material-ui/core/Card';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
@@ -25,13 +25,16 @@ import DeleteDevice from './deleteDevice'
 
 const styles = theme => ({
   panel: {
-    minHeight: 105,
-    minWidth: 275,
-    maxWidth: 150,
+    width: 275,
   },
-  card: {
-    minWidth: 275,
-    maxWidth: 150,
+  details: {
+    width: 275,
+    height: 275,
+  },
+  action: {
+    width: 275,
+    minHeight: 35,
+    maxHeight: 35,
   },
   title: {
     fontSize: 14,
@@ -49,8 +52,7 @@ class Device extends Component {
   render() {
     const { classes } = this.props;
     return (
-      <Card className={classes.card}>
-        <ExpansionPanel>
+      <ExpansionPanel>
         <ExpansionPanelSummary className={classes.panel} expandIcon={<ExpandMoreIcon />}>
         <CardHeader
            avatar={
@@ -63,7 +65,7 @@ class Device extends Component {
         </CardHeader>
         </ExpansionPanelSummary>
         <Divider light />
-        <ExpansionPanelDetails>
+        <ExpansionPanelDetails className={classes.details}>
             <List dense>
               <ListItem>
                 <ListItemIcon>
@@ -92,13 +94,11 @@ class Device extends Component {
             </List>
         </ExpansionPanelDetails>
         <Divider light />
-        <ExpansionPanelActions>
+        <ExpansionPanelActions className={classes.action}>
           <EditDevice currentItem={this.props.device}/>
           <DeleteDevice currentItem={this.props.device}/>
         </ExpansionPanelActions>
-
-        </ExpansionPanel>
-      </Card>
+      </ExpansionPanel>
     );
   }
 }

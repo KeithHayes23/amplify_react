@@ -5,7 +5,6 @@ import * as subscriptions from '../../graphql/subscriptions';
 import DeviceSearchBar from './DeviceSearchBar';
 import DeviceTableView from './DeviceTableView';
 import DeviceCardView from './DeviceCardView';
-import Paper from '@material-ui/core/Paper';
 import Divider from '@material-ui/core/Divider';
 
 function findIndexByKeyValue(obj, key, value)
@@ -122,11 +121,11 @@ class DeviceView extends Component {
     }
 
     return (
-      <Paper style={{ position: 'relative' }}>
+      <div>
         <DeviceSearchBar getSearchString={this.handleSearch} handleSwitchView={this.handleSwitchView}/>
         <Divider light />
         {view}
-      </Paper>
+      </div>
     );
   }
 }
