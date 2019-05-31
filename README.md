@@ -134,7 +134,9 @@ To find the dynamodb table name run this from the command line:
 aws dynamodb list-tables
 ```
 The export it like this:
+```
 export DYNAMODB_TABLE=ENTER_YOUR_TABLE_NAME_HERE
+```
 
 Number of device is set to 100. You can change the NUM_DEVICES global variable in the script if you want.
 NUM_DEVICE=100
