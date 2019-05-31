@@ -165,7 +165,7 @@ aws es describe-elasticsearch-domain --domain-name
 
 1. Implement search feature in app bar: &#9745;
 2. Re-add subscriptions to CardView for CRUD activities: &#9745;
-3. Add menu to switch from card to table view for devices: WIP
+3. Add menu to switch from card to table view for devices: &#9745;
 3. Implement CI/CD Pipeline for deployment:
 
 ### OBSOLETE
