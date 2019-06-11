@@ -8,4 +8,8 @@ The backend AWS services for IOT Operations including:
 
 # Install Serverless
 The backend is deployed via the [Serverless Framework](https://serverless.com/)
+
+```
+cd project_root/backend
+npm install -g serverless
 ```
