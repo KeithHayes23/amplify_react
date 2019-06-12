@@ -23,6 +23,11 @@ yarn add aws-amplify aws-amplify-react
 Currently I'm using Material UI
 https://www.materialui.co/icons
 
+You may need to clean up the node modules in your project directory
+```
+rm -rf node_modules
+```
+
 ```
 yarn install
 ```
@@ -119,6 +124,7 @@ So here is a list of useful links for referencing examples.
 8. https://devexpress.github.io/devextreme-reactive/react/grid/demos/featured/integrated-data-shaping/
 9. https://read.acloud.guru/backend-graphql-how-to-trigger-an-aws-appsync-mutation-from-aws-lambda-eda13ebc96c3
 10. https://sandny.com/2018/08/26/how-to-mutate-aws-graphql-using-aws-lambda/
+
 
 ### CLI Commands
 
