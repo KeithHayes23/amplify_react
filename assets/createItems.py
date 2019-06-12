@@ -4,9 +4,14 @@ import json
 import decimal
 from random import randint
 import uuid
+import os
 
-REGION='us-east-1'
-DYNAMODB='Item-gn4dilwumzg37kklwsftielmxm-dev'
+DYNAMODB=""
+if "DYNAMODB_TABLE" in os.environ:
+    DYNAMODB=os.environ.get('DYNAMODB_TABLE')
+else:
+    print('Error: DYNAMODB_TABLE environment variable required')
+    exit()
 
 # Helper class to convert a DynamoDB item to JSON.
 class DecimalEncoder(json.JSONEncoder):
@@ -20,20 +25,23 @@ class DecimalEncoder(json.JSONEncoder):
 
 
 def lambda_handler(event, context):
-    # this will create dynamodb resource object and
-    # here dynamodb is resource name
-    client = boto3.resource('dynamodb')
+    try:
+        # this will create dynamodb resource object and
+        # here dynamodb is resource name
+        client = boto3.resource('dynamodb')
 
-    # this will search for dynamoDB table
-    # your table name may be different
-    table = client.Table(DYNAMODB)
-    print(table.table_status)
-    i = 0
-    while i < 10:
-        i += 1
-        UUID = str(uuid.uuid4())
-        price = randint(1, 1000)
-        response = table.put_item(Item= {'id': UUID,'price':  price, 'description': 'Descrption: '+UUID})
-        print(json.dumps(response, indent=4, cls=DecimalEncoder))
-
+        # this will search for dynamoDB table
+        # your table name may be different
+        table = client.Table(DYNAMODB)
+        print(table.table_status)
+        i = 0
+        while i < 10:
+            i += 1
+            UUID = str(uuid.uuid4())
+            price = randint(1, 1000)
+            response = table.put_item(Item= {'id': UUID,'price':  price, 'description': 'Descrption: '+UUID})
+            print(json.dumps(response, indent=4, cls=DecimalEncoder))
+    except Exception as e:
+        print("Unexpected error: %s" % e)
+        
 lambda_handler('','')
