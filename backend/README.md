@@ -6,13 +6,6 @@ The backend AWS services for IOT Operations including:
 2. IOT Device Registration
 3. IOT Message Processing via [AWS Kinesis](https://aws.amazon.com/kinesis/)
 
-# Install Serverless
-The backend is deployed via the [Serverless Framework](https://serverless.com/)
-
-```
-cd project_root/backend
-npm install -g serverless
-```
 ### References
 1. https://aws.amazon.com/blogs/iot/deploy-fleets-easily-with-aws-iot-device-management-services/
 2. https://docs.aws.amazon.com/iot/latest/developerguide/policy-actions.html
